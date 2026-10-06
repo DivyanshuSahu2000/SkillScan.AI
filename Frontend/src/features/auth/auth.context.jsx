@@ -1,26 +1,40 @@
-import { createContext, useEffect, useState } from "react";
-import { getme } from "./services/auth.api";
+// import { createContext, useEffect, useState } from "react";
+// import { getme } from "./services/auth.api";
 
-const AuthContext = createContext();
+// const AuthContext = createContext();
 
-const AuthProvider = ({ children }) => {
+// const AuthProvider = ({ children }) => {
+//   const [user, setUser] = useState(null);
+//   const [loading, setLoading] = useState(true);
+
+//   useEffect(() => {
+//     const getAndSetUser = async () => {
+//       const data = await getme();
+//       setUser(data.user);
+//       setLoading(false);
+//     };
+//     getAndSetUser();
+//   }, []);
+
+//   return (
+//     <AuthContext.Provider value={{ user, setUser, loading, setLoading }}>
+//       {children}
+//     </AuthContext.Provider>
+//   );
+// };
+
+// export { AuthContext, AuthProvider };
+
+import { createContext, useState } from "react";
+
+export const AuthContext = createContext();
+
+export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const getAndSetUser = async () => {
-      const data = await getme();
-      setUser(data.user);
-      setLoading(false);
-    };
-    getAndSetUser();
-  }, []);
-
   return (
     <AuthContext.Provider value={{ user, setUser, loading, setLoading }}>
       {children}
     </AuthContext.Provider>
   );
 };
-
-export { AuthContext, AuthProvider };

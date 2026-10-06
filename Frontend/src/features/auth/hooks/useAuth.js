@@ -40,10 +40,25 @@ export const useAuth = () => {
 
   useEffect(() => {
     const getAndSetUser = async () => {
-      const data = await getme();
-      setUser(data.user);
-      setLoading(false);
+      try {
+        const data = await getme();
+        // Optional chaining (?.) ensures it won't crash if data is undefined
+        if (data?.user) {
+          setUser(data.user);
+        } else {
+          setUser(null);
+        }
+      } catch (error) {
+        console.error(
+          "Failed to restore session (Server might be offline):",
+          error
+        );
+        setUser(null);
+      } finally {
+        setLoading(false); // Turns off loading state even if server fails
+      }
     };
+
     getAndSetUser();
   }, []);
   return { user, loading, handleLogin, handleLogout, handleRegister };

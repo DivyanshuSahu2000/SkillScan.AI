@@ -32,5 +32,6 @@ authRouter.get(
   authMiddleware.authUser,
   authController.getMeController
 );
+authRouter.get("");
 
 export default authRouter;
