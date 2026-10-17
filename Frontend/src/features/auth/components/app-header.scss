@@ -1,0 +1,191 @@
+$header-bg: #111720;
+$header-border: #273244;
+$header-text: #e6edf3;
+$header-muted: #a1aab8;
+$header-accent: #ff2d78;
+
+.app-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    width: 100%;
+    border-bottom: 1px solid $header-border;
+    background: $header-bg;
+    color: $header-text;
+
+    &__content {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        width: min(100% - 3rem, 1280px);
+        min-height: 4.5rem;
+        margin: 0 auto;
+    }
+
+    @media print {
+        .app-header {
+            display: none;
+        }
+    }
+
+    &__brand {
+        flex-shrink: 0;
+        color: $header-text;
+        font-size: 1.35rem;
+        font-weight: 750;
+        letter-spacing: -0.04em;
+        text-decoration: none;
+
+        span {
+            color: $header-accent;
+        }
+    }
+
+    &__nav {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        flex: 1;
+    }
+
+    &__link {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        padding: 0.55rem 0;
+        color: $header-muted;
+        font-size: 0.9rem;
+        text-decoration: none;
+        box-shadow: inset 0 -2px transparent;
+        transition: box-shadow 0.15s, color 0.15s;
+
+        &:hover {
+            color: $header-text;
+        }
+
+        &.active {
+            color: $header-text;
+            box-shadow: inset 0 -2px $header-accent;
+        }
+
+        &:focus-visible {
+            border-radius: 0.2rem;
+            outline: 2px solid $header-accent;
+            outline-offset: 3px;
+        }
+    }
+
+    &__account {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    &__username {
+        max-width: 12rem;
+        overflow: hidden;
+        font-weight: 500;
+        color: $header-muted;
+        font-size: 0.9rem;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    &__logout.logout-button {
+        padding: 0.55rem 0.85rem;
+        border-color: #493044;
+        background: transparent;
+        color: $header-text;
+
+        &:hover:not(:disabled) {
+            border-color: $header-accent;
+            background: rgba($header-accent, 0.08);
+            color: $header-accent;
+        }
+    }
+}
+
+.logout-control {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.4rem;
+}
+
+.logout-button {
+    padding: 0.65rem 1rem;
+    border: 1px solid $header-border;
+    border-radius: 0.5rem;
+    background: #161b22;
+    color: $header-text;
+    font: inherit;
+    cursor: pointer;
+    transition: border-color 0.15s, color 0.15s;
+
+    &:hover:not(:disabled) {
+        border-color: $header-accent;
+        color: $header-accent;
+    }
+
+    &:disabled {
+        cursor: wait;
+        opacity: 0.65;
+    }
+}
+
+.logout-error {
+    max-width: 16rem;
+    margin: 0;
+    color: #ff8a8a;
+    font-size: 0.8rem;
+    text-align: right;
+}
+
+@media (max-width: 640px) {
+    .app-header {
+        &__content {
+            flex-wrap: wrap;
+            gap: 0.5rem 1rem;
+            width: calc(100% - 2rem);
+            padding: 0.75rem 0;
+        }
+
+        &__brand {
+            flex: 1;
+        }
+
+        &__nav {
+            order: 3;
+            flex-basis: 100%;
+        }
+
+        &__link {
+            padding: 0.45rem 0;
+        }
+
+        &__account {
+            gap: 0.6rem;
+            margin-left: auto;
+        }
+
+        &__username {
+            max-width: 7rem;
+        }
+    }
+
+    @media (max-width: 420px) {
+        .app-header {
+            &__content {
+                width: calc(100% - 1.25rem);
+            }
+
+            &__username {
+                max-width: 5.5rem;
+            }
+
+            &__logout.logout-button {
+                padding: 0.5rem 0.6rem;
+            }
+        }
+    }
+}
